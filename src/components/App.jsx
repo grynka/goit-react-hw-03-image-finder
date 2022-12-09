@@ -30,7 +30,7 @@ export default class App extends Component {
         }}
       >
         <Searchbar onSubmit={this.handleFormSubmit} />
-        {this.state.images && <div>{this.state.hits}</div>}
+        {this.state.images.map</div>}
       </div>
     );
   };
