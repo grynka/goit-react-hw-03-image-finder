@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import Searchbar from "./Searchbar/Searchbar";
 import { Component } from "react";
 
 export default class App extends Component {
@@ -9,12 +9,21 @@ export default class App extends Component {
 
   componentDidMount() {
     fetch(
-      'https://pixabay.com/api/?q=cat&page=1&key=30502346-d120979d6222d217ab4c63b0e'
+      'https://pixabay.com/api/?q=cat&page=1&key=30502346-d120979d6222d217ab4c63b0e&image_type=photo&orientation=horizontal&per_page=12'
     )
       .then(res => res.json())
-      .then(console.log);
+      .then(images => this.setState({ images }));
 }
 
+  handleFormSubmit = searchRequest => {
+    fetch(
+      `https://pixabay.com/api/?q={searchRequest}&page=1&key=30502346-d120979d6222d217ab4c63b0e&image_type=photo&orientation=horizontal&per_page=12`
+    )
+      .then(res => res.json())
+      .then(images => this.setState({ images }));
+}
+  }
+  
   render() {
     return (
       <div
@@ -24,10 +33,11 @@ export default class App extends Component {
           justifyContent: 'center',
           alignItems: 'center',
           fontSize: 40,
-          color: '#010101'
+          color: '#010101',
         }}
       >
-       {this.state.images && <div>картинки...</div>}
+        <Searchbar onSubmit={this.handleFormSubmit} />
+        {this.state.images && <div>{this.state.hits}</div>}
       </div>
     );
   };
