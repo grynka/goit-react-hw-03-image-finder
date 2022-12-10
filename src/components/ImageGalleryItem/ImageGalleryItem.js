@@ -5,7 +5,10 @@ export default class ImageGalleryItem extends Component {
   render() {
         return (
           <li key={this.props.children[1].id}>
-                      <img src={this.props.children[1].webformatURL} />
+            <img
+              src={this.props.children[1].webformatURL}
+              alt={this.props.children[1].tags}
+            />
           </li>
         );
   }

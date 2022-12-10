@@ -1,4 +1,5 @@
 import ImageGalleryItem from "components/ImageGalleryItem/ImageGalleryItem";
+import { Gallery } from "./ImageGallery.styled";
 import { Component } from "react";
 
 export default class ImageGallery extends Component {
@@ -21,10 +22,9 @@ export default class ImageGallery extends Component {
     
      render() {
     return (
-      <ul className="gallery">
-        <p>{this.props.searchImages}</p>
+      <Gallery className="gallery">
             {this.state.images && this.state.images.map((image) =>  <ImageGalleryItem> { image }</ImageGalleryItem> )}
-      </ul>
+      </Gallery>
     );
   }}
 

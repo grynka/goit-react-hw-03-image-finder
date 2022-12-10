@@ -33,14 +33,15 @@ export const Button = styled.button`
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
+  background-image: url('https://www.flaticon.com/free-icon/search_149401?related_id=149401&origin=pack');
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0.6;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  outline: none;`
+  outline: none;
+`;
 
   export const Label = styled.span`
   position: absolute;

@@ -1,4 +1,5 @@
 import { Searchbars, SearchForm, Button, Label, Input } from './Searchbar.styled';
+import { ImSearch} from 'react-icons/im';
 const { Component } = require("react");
 
 
@@ -27,6 +28,7 @@ export default class Searchbar extends Component {
           <Searchbars>
             <SearchForm onSubmit={this.handleSubmit}>
               <Button type="submit" className="button">
+                <ImSearch />
                 <Label>Search</Label>
               </Button>
 
