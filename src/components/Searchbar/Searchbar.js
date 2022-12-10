@@ -1,4 +1,6 @@
+import { Searchbars, SearchForm, Button, Label, Input } from './Searchbar.styled';
 const { Component } = require("react");
+
 
 export default class Searchbar extends Component {
     state = {
@@ -22,24 +24,23 @@ export default class Searchbar extends Component {
 } 
     render() {
         return (
-            <header className="searchbar">
-  <form className="form" onSubmit={this.handleSubmit} >
-    <button type="submit" className="button">
-      <span className="button-label">Search</span>
-    </button>
+          <Searchbars>
+            <SearchForm onSubmit={this.handleSubmit}>
+              <Button type="submit" className="button">
+                <Label>Search</Label>
+              </Button>
 
-    <input
-      className="input"
-      type="text"
-      autoComplete="off"
-      autoFocus
-                        placeholder="Search images and photos"
-                        value={this.state.searchRequest}
-                        onChange={this.handleRequestChange}
-    />
-  </form>
-</header>
-        
+              <Input
+                className="input"
+                type="text"
+                autoComplete="off"
+                autoFocus
+                placeholder="Search images and photos"
+                value={this.state.searchRequest}
+                onChange={this.handleRequestChange}
+              />
+            </SearchForm>
+          </Searchbars>
         );
 }
     }
