@@ -39,13 +39,13 @@ export default class ImageGallery extends Component {
       `${URL}?key=${key}&q=${this.props.searchImages}&image_type=photo&orientation=horizontal&per_page=12&page=${this.state.page}`
     )
       .then(res => res.json())
-      .then(hits => this.setState((prevState) => ({ images: [prevState.images, ...hits.hits], error: '' })))
+      .then(hits => this.setState((prevState) => ({ images: [...prevState.images, ...hits.hits], error: '' })))
       .catch(error => this.setState({error: 'Error while loading data. Try again later.'}))
       .finally(this.setState({ loading: false }));
   };
 
   render() {
-    const { images, loading, page } = this.state;
+    const { images, loading } = this.state;
     return (
       <>
         <Gallery className="gallery">
@@ -55,7 +55,7 @@ export default class ImageGallery extends Component {
               <ImageGalleryItem key={image.id}> {image}</ImageGalleryItem>
             ))}
         </Gallery>
-        {page && <button onClick={this.loadMore} />}
+        <button onClick={this.loadMore} />
       </>
     );
   }
