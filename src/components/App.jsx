@@ -1,19 +1,15 @@
 import Searchbar from "./Searchbar/Searchbar";
 import { Component } from "react";
+import ImageGallery from "./ImageGallery/ImageGallery";
 
 export default class App extends Component {
   state = {
-    images: {}
+    searchImages: ''
   };
 
 
-  handleFormSubmit = searchRequest => {
-    console.log(searchRequest.searchRequest);
-    fetch(
-      `https://pixabay.com/api/?q=${searchRequest.searchRequest}&page=1&key=30502346-d120979d6222d217ab4c63b0e&image_type=photo&orientation=horizontal&per_page=12`
-    )
-      .then(res => res.json())
-      .then(images => this.setState({ images }));
+  handleFormSubmit = ({searchRequest}) => {
+    this.setState({searchImages: searchRequest})
 }
   
   
@@ -30,7 +26,7 @@ export default class App extends Component {
         }}
       >
         <Searchbar onSubmit={this.handleFormSubmit} />
-        {this.state.images.map</div>}
+        <ImageGallery images={this.state.searchImages} />
       </div>
     );
   };
