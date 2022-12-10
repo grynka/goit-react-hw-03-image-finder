@@ -1,10 +1,14 @@
+import { Component } from "react";
 
-const ImageGalleryItem  = ({ image }) => {
-    return (
-      <li class="gallery-item" key={image.id}>
-        <img src={image.webformatURL} alt={image.largeImageURL} />
-      </li>
-    );
+export default class ImageGalleryItem extends Component {
+  
+  render() {
+        return (
+          <li key={this.props.children[1].id}>
+                      <img src={this.props.children[1].webformatURL} />
+          </li>
+        );
   }
 
-export default ImageGalleryItem
+  }
+
