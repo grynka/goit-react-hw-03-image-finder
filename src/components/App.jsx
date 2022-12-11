@@ -1,18 +1,17 @@
-import Searchbar from "./Searchbar/Searchbar";
-import { Component } from "react";
-import ImageGallery from "./ImageGallery/ImageGallery";
+import Searchbar from './Searchbar/Searchbar';
+import { Component } from 'react';
+import ImageGallery from './ImageGallery/ImageGallery';
 
 export default class App extends Component {
+
   state = {
-    searchImages: ''
+    searchImages: '',
   };
 
+  handleFormSubmit = ({ searchRequest }) => {
+    this.setState({ searchImages: searchRequest });
+  };
 
-  handleFormSubmit = ({searchRequest}) => {
-    this.setState({searchImages: searchRequest})
-}
-  
-  
   render() {
     return (
       <>
@@ -20,5 +19,5 @@ export default class App extends Component {
         <ImageGallery searchImages={this.state.searchImages} />
       </>
     );
-  };
+  }
 }
