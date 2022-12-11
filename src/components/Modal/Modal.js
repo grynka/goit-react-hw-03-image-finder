@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { Overlay, Modals } from './Modal.styled';
+import PropTypes from 'prop-types';
+
 
 export class Modal extends Component {
   componentDidMount() {
@@ -34,3 +36,9 @@ export class Modal extends Component {
     );
   }
 }
+
+Modal.propTypes = {
+    largeImage: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired,
+    onClose: PropTypes.func.isRequired,
+};

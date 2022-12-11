@@ -3,14 +3,15 @@ import { Gallery } from './ImageGallery.styled';
 import { Component } from 'react';
 import Loader from 'components/Loader/Loader';
 import Button from 'components/Button/Button';
-  import { toast, ToastContainer } from 'react-toastify';
-  import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 
 export default class ImageGallery extends Component {
   state = {
     images: '',
     loading: false,
-    page: null,
+    page: 1,
   };
 
   loadMore = () => {
@@ -41,21 +42,18 @@ export default class ImageGallery extends Component {
     await this.setState({
       loading: true,
     });
-    
-    
+
     fetch(
       `${URL}?key=${key}&q=${this.props.searchImages}&image_type=photo&orientation=horizontal&per_page=12&page=${this.state.page}`
     )
       .then(res => res.json())
-      .then(data => {if (data.totalHits > 0) 
-         this.setState(prevState => ({
-          images: [...prevState.images, ...data.hits],
-        }))
-        else 
-        toast.error('Oops! No matches found.')
-      }
-        
-      )
+      .then(data => {
+        if (data.totalHits > 0)
+          this.setState(prevState => ({
+            images: [...prevState.images, ...data.hits],
+          }));
+        else toast.error('Oops! No matches found.');
+      })
       .catch(error =>
         this.setState({ error: 'Error while loading data. Try again later.' })
       )
@@ -86,3 +84,7 @@ export default class ImageGallery extends Component {
     );
   }
 }
+
+ImageGallery.propTypes = {
+  searchImages: PropTypes.string.isRequired,
+};
