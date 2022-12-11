@@ -22,27 +22,29 @@ export default class ImageGallery extends Component {
     this.loadImages()
   };
 
-  componentDidUpdate(prevProps, prevState) {
+componentDidUpdate(prevProps, prevState) {
     if (
       prevProps.searchImages !== this.props.searchImages      
     ) {
-      this.setState({  
+ this.setState({  
         images: '',
         page: 1,
       })
-      this.loadImages();
+      console.log(this.state.loading);
+ this.loadImages();
     }
   }
 
-loadImages = () => {
+loadImages = async () => {
     const URL = 'https://pixabay.com/api/';
     const key = '30502346-d120979d6222d217ab4c63b0e';
-    console.log(this.state.images);
-    this.setState({ loading: true });
+   await this.setState({  
+      loading: true
+    })
+    console.log(this.state.loading);
 
-
-    fetch (
-      `${URL}?key=${key}&q=${this.props.searchImages}&image_type=photo&orientation=horizontal&per_page=12&page=${this.state.page + 1}`
+   await fetch (
+      `${URL}?key=${key}&q=${this.props.searchImages}&image_type=photo&orientation=horizontal&per_page=12&page=${this.state.page}`
     )
       .then(res => res.json())
       .then(data => this.setState((prevState) => ({images: [...prevState.images, ...data.hits]}))
