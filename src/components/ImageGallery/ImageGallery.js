@@ -9,21 +9,27 @@ export default class ImageGallery extends Component {
     images: '',
     loading: false,
     page: null,
-    error: ""
   };
 
   loadMore = () => {
     console.log(this.state.page);
+    this.setState({
+      loading: true,
+});
     this.setState(prevState => ({
       page: prevState.page + 1,
     }));
+    this.loadImages()
   };
 
   componentDidUpdate(prevProps, prevState) {
     if (
-      prevProps.searchImages !== this.props.searchImages ||
-      prevState.page !== this.state.page
+      prevProps.searchImages !== this.props.searchImages      
     ) {
+      this.setState({  
+        images: '',
+        page: 1,
+      })
       this.loadImages();
     }
   }
@@ -31,31 +37,38 @@ export default class ImageGallery extends Component {
   loadImages = () => {
     const URL = 'https://pixabay.com/api/';
     const key = '30502346-d120979d6222d217ab4c63b0e';
-
+    console.log(this.state.images);
     this.setState({ loading: true });
-     console.log(this.state.images);
+
 
     fetch(
       `${URL}?key=${key}&q=${this.props.searchImages}&image_type=photo&orientation=horizontal&per_page=12&page=${this.state.page}`
     )
       .then(res => res.json())
-      .then(hits => this.setState((prevState) => ({ images: [...prevState.images, ...hits.hits], error: '' })))
+      .then(data => this.setState((prevState) => ({images: [...prevState.images, ...data.hits]}))
+      )
       .catch(error => this.setState({error: 'Error while loading data. Try again later.'}))
       .finally(this.setState({ loading: false }));
   };
 
   render() {
-    const { images, loading } = this.state;
+    const { images, loading, page } = this.state;
     return (
       <>
         <Gallery className="gallery">
-          {loading && <Loader />}
-          {images &&
-            images.map(image => (
-              <ImageGalleryItem key={image.id}> {image}</ImageGalleryItem>
-            ))}
+           {images &&
+            images.map(image => {
+              return <ImageGalleryItem 
+              key={image.id}
+              url={image.webformatURL}
+              alt={image.tags}
+              largeImage={image.largeImageURL}
+               />}
+              
+            )}
         </Gallery>
-        <button onClick={this.loadMore} />
+        {loading && <Loader />}
+        {page && <Button onClick={this.loadMore} />}
       </>
     );
   }

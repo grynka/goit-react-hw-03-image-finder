@@ -8,7 +8,9 @@ export default class Searchbar extends Component {
         searchRequest: '',
     }
     handleRequestChange = event => {
-        this.setState({ searchRequest: event.currentTarget.value });
+      this.setState({
+        searchRequest: event.currentTarget.value
+      });
     }
 
     handleSubmit = event => {
@@ -22,7 +24,15 @@ export default class Searchbar extends Component {
           this.props.onSubmit({
             searchRequest: this.state.searchRequest,
           });
-} 
+      this.reset();
+  } 
+
+  reset = () => {
+    this.setState({
+      searchRequest: ''
+    });
+  }
+
     render() {
         return (
           <Searchbars>

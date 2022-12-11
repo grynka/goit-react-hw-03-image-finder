@@ -1,9 +1,10 @@
 import { Component } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import { Loaders } from "./Loader.styled";
 
 export default class Loader extends Component {
     render() {
-        return (
+        return (<Loaders>
             <ThreeDots
   height="80"
   width="80"
@@ -13,7 +14,7 @@ export default class Loader extends Component {
   wrapperStyle={{}}
   wrapperClassName=""
   visible={true}
-/> 
+/> </Loaders>
         )
     }
 
