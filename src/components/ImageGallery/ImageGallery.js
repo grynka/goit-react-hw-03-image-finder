@@ -34,15 +34,15 @@ export default class ImageGallery extends Component {
     }
   }
 
-  loadImages = () => {
+loadImages = () => {
     const URL = 'https://pixabay.com/api/';
     const key = '30502346-d120979d6222d217ab4c63b0e';
     console.log(this.state.images);
     this.setState({ loading: true });
 
 
-    fetch(
-      `${URL}?key=${key}&q=${this.props.searchImages}&image_type=photo&orientation=horizontal&per_page=12&page=${this.state.page}`
+    fetch (
+      `${URL}?key=${key}&q=${this.props.searchImages}&image_type=photo&orientation=horizontal&per_page=12&page=${this.state.page + 1}`
     )
       .then(res => res.json())
       .then(data => this.setState((prevState) => ({images: [...prevState.images, ...data.hits]}))
